@@ -180,6 +180,7 @@ nav {
   padding: 12px 28px;
   background: var(--nav-bg);
   border-bottom: 1px solid var(--nav-border);
+  -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 }
 
@@ -225,9 +226,13 @@ nav ul a.active {
   min-height: 100svh;
   padding: 110px 0 70px;
   background:
-    radial-gradient(60% 50% at 8% 0%, var(--glow-violet), transparent 70%),
-    radial-gradient(50% 45% at 100% 100%, var(--glow-gold), transparent 70%),
+    radial-gradient(60% 50% at 8% 0%, var(--glow-violet), rgba(154, 140, 255, 0) 70%),
+    radial-gradient(50% 45% at 100% 100%, var(--glow-gold), rgba(255, 198, 92, 0) 70%),
     var(--paper);
+}
+
+.hero-grid > * {
+  min-width: 0;
 }
 
 .hero-grid {
@@ -299,6 +304,7 @@ nav ul a.active {
 #sim {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: clamp(240px, 38vh, 380px);
   cursor: crosshair;
   touch-action: pan-y;
@@ -487,8 +493,11 @@ nav ul a.active {
 .project::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(300px circle at var(--x, 50%) var(--y, 0%), rgba(154, 140, 255, 0.22), transparent 70%);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: radial-gradient(300px circle at var(--x, 50%) var(--y, 0%), rgba(154, 140, 255, 0.22), rgba(154, 140, 255, 0) 70%);
   opacity: 0;
   transition: opacity 0.3s;
 }
