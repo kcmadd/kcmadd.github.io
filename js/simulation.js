@@ -24,6 +24,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 let width = 0;
 let height = 0;
 let shocks = [];
+let paths = [];
 let seed = 7;
 let startTime = null;
 let visible = true;
@@ -64,8 +65,9 @@ function resizeCanvas() {
   ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 }
 
-// Returns an array of paths, each a list of log returns over time
-function buildPaths() {
+// Rebuilds the paths from the stored shocks. Runs when a slider moves or on re-run,
+// not every frame, which keeps drawing cheap.
+function updatePaths() {
   const vol = volSlider.value / 100;
   const drift = driftSlider.value / 100;
   const dt = YEARS / STEPS;
@@ -73,15 +75,27 @@ function buildPaths() {
   volOutput.textContent = volSlider.value + '%';
   driftOutput.textContent = driftSlider.value + '%';
 
-  return shocks.map(row => {
+  let endedUp = 0;
+
+  paths = shocks.map(row => {
     const path = [0];
     let logReturn = 0;
     for (let k = 1; k < STEPS; k++) {
       logReturn += (drift - 0.5 * vol * vol) * dt + vol * Math.sqrt(dt) * row[k];
       path.push(logReturn);
     }
+    if (logReturn > 0) endedUp++;
     return path;
   });
+
+  pctUp.textContent = Math.round(endedUp / PATH_COUNT * 100) + '%';
+}
+
+function makeGradient(left, right, endColor) {
+  const gradient = ctx.createLinearGradient(left, 0, right, 0);
+  gradient.addColorStop(0, 'rgba(154, 140, 255, 0.08)');
+  gradient.addColorStop(1, endColor);
+  return gradient;
 }
 
 function drawGrid(left, right, midY, scale) {
@@ -108,7 +122,6 @@ function drawGrid(left, right, midY, scale) {
 function draw(timestamp) {
   if (startTime === null) startTime = timestamp;
 
-  const paths = buildPaths();
   const progress = reduceMotion ? 1 : Math.min(1, (timestamp - startTime) / INTRO_MS);
   const eased = 1 - Math.pow(1 - progress, 3);
   const pointsToDraw = Math.floor(eased * (STEPS - 1)) + 1;
@@ -121,16 +134,13 @@ function draw(timestamp) {
   ctx.clearRect(0, 0, width, height);
   drawGrid(left, right, midY, scale);
 
-  let endedUp = 0;
+  // Only two line colors exist (paths that end up or down), so build two gradients
+  // per frame instead of one per path. Much faster in Safari.
+  const upGradient = makeGradient(left, right, 'rgba(255, 198, 92, 0.8)');
+  const downGradient = makeGradient(left, right, 'rgba(111, 227, 255, 0.6)');
 
   paths.forEach((path, i) => {
-    const final = path[STEPS - 1];
-    if (final > 0) endedUp++;
-
-    const gradient = ctx.createLinearGradient(left, 0, right, 0);
-    gradient.addColorStop(0, 'rgba(154, 140, 255, 0.08)');
-    gradient.addColorStop(1, final > 0 ? 'rgba(255, 198, 92, 0.8)' : 'rgba(111, 227, 255, 0.6)');
-    ctx.strokeStyle = gradient;
+    ctx.strokeStyle = path[STEPS - 1] > 0 ? upGradient : downGradient;
     ctx.lineWidth = 1.1;
     ctx.beginPath();
 
@@ -161,8 +171,6 @@ function draw(timestamp) {
     ctx.stroke();
   }
 
-  pctUp.textContent = Math.round(endedUp / PATH_COUNT * 100) + '%';
-
   if (visible) requestAnimationFrame(draw);
 }
 
@@ -182,8 +190,12 @@ canvas.addEventListener('pointerleave', () => {
 document.getElementById('rerun').addEventListener('click', () => {
   seed = (seed * 48271 + 11) % 2147483647;
   generateShocks();
+  updatePaths();
   startTime = null;
 });
+
+volSlider.addEventListener('input', updatePaths);
+driftSlider.addEventListener('input', updatePaths);
 
 // Stop animating when the hero is scrolled out of view
 new IntersectionObserver(([entry]) => {
@@ -192,8 +204,15 @@ new IntersectionObserver(([entry]) => {
   if (visible && !wasVisible) requestAnimationFrame(draw);
 }).observe(canvas);
 
-window.addEventListener('resize', resizeCanvas);
+// Watch the canvas itself, not just the window, so layout changes are picked up
+// (web fonts loading, the mobile address bar collapsing, and so on)
+if ('ResizeObserver' in window) {
+  new ResizeObserver(resizeCanvas).observe(canvas);
+} else {
+  window.addEventListener('resize', resizeCanvas);
+}
 
 generateShocks();
+updatePaths();
 resizeCanvas();
 requestAnimationFrame(draw);
