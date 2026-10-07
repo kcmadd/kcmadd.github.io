@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kalyan Maddineni | Software Engineer</title>
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f4f6fc" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#090b21" media="(prefers-color-scheme: dark)">
+  <meta name="description" content="Kalyan Maddineni, software engineer at Fidelity Investments and UMass Amherst alum.">
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav id="nav">
+    <a class="logo" href="#top">Kalyan Maddineni</a>
+    <ul>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <h1>Kalyan Maddineni</h1>
+        <p>I'm a software engineer at Fidelity Investments, working in Fidelity Brokerage Technology. I graduated from <a href="https://www.umass.edu/">UMass Amherst</a>.</p>
+        <div class="button-row">
+          <a class="btn btn-primary" href="resume/Maddineni_Resume.pdf" target="_blank" rel="noopener">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M6 2h8l6 6v14H6zM14 3.5V9h5.5zM8 14h8v1.6H8zm0 3.4h8V19H8z"/></svg>
+            Resume
+          </a>
+          <a class="btn" href="https://github.com/kcmadd">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.47.11-3.06 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.77.11 3.06.74.81 1.19 1.84 1.19 3.1 0 4.42-2.69 5.39-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+            GitHub
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/kcmadd/">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.82-2 3.75-2 4 0 4.75 2.6 4.75 6V21h-4v-4.95c0-1.2 0-2.7-1.7-2.7s-1.9 1.3-1.9 2.6V21h-4z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <strong>70 simulated price paths</strong>
+            <span>Geometric Brownian motion, the model behind my Black-Scholes project. Move your mouse over the chart.</span>
+          </div>
+          <div class="panel-stat">
+            <strong id="pct-up">0%</strong>
+            <span>end above start</span>
+          </div>
+        </div>
+
+        <canvas id="sim" role="img" aria-label="Chart of simulated stock price paths"></canvas>
+
+        <div class="controls">
+          <label>Volatility <output id="vol-out">32%</output>
+            <input id="vol" type="range" min="5" max="70" value="32">
+          </label>
+          <label>Yearly drift <output id="drift-out">5%</output>
+            <input id="drift" type="range" min="-20" max="40" value="5">
+          </label>
+          <button id="rerun" type="button">Re-run</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="experience">
+      <div class="container">
+        <h2 class="reveal">Experience</h2>
+
+        <div class="timeline">
+          <article class="job current reveal">
+            <img src="images/Fidelity_Logo.jpg" alt="Fidelity Investments logo">
+            <div>
+              <h3>Software Engineer <span class="badge">Current</span></h3>
+              <p class="org">Fidelity Investments, Fidelity Brokerage Technology</p>
+              <ul>
+                <li>Modernizing mainframe applications into microservices hosted on AWS and Azure.</li>
+                <li>Built a web portal where users manage access to internal applications and their permissions and roles.</li>
+              </ul>
+              <ul class="tags">
+                <li>Java</li><li>JavaScript</li><li>Angular</li><li>Spring Boot</li><li>MyBatis</li><li>Oracle PL/SQL</li><li>PostgreSQL</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="job reveal">
+            <img src="images/UMass_Logo.jpg" alt="UMass Amherst logo">
+            <div>
+              <h3>Software Engineering Intern</h3>
+              <p class="org">University of Massachusetts Amherst</p>
+              <ul>
+                <li>Designed and built a website for real-time index tracking.</li>
+                <li>Integrated a trading strategy that factors in trade size and risk management. It runs alongside a human as a decision-making assistant.</li>
+              </ul>
+              <ul class="tags">
+                <li>JavaScript</li><li>Angular</li><li>PostgreSQL</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="job reveal">
+            <img src="images/Fidelity_Logo.jpg" alt="Fidelity Investments logo">
+            <div>
+              <h3>Software Engineering Intern</h3>
+              <p class="org">Fidelity Investments</p>
+              <ul>
+                <li>Built an operational monitoring tool in SQL and Tableau for bond, security and index data.</li>
+                <li>Made a dashboard for tracking app usage, query calls, database degradation and query variance.</li>
+                <li>Cut slow query time from 3 minutes to 10 seconds by optimizing a database with hashing.</li>
+              </ul>
+              <ul class="tags">
+                <li>Python</li><li>Tableau</li><li>Oracle PL/SQL</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark" id="projects">
+      <div class="container">
+        <h2 class="reveal">Projects</h2>
+
+        <div class="project-grid">
+          <article class="project reveal">
+            <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 8-9M15 5h5v5"/></svg></div>
+            <h3>Black-Scholes Option Pricing</h3>
+            <p>An option pricing calculator and Geometric Brownian Motion simulator based on the Black-Scholes formula. The chart at the top of this page uses the same model.</p>
+            <ul class="tags"><li>C++</li><li>Python</li></ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M3 20V4M3 20h18M7 15l4-4 3 3 6-7"/></svg></div>
+            <h3>Machine Learning for Finance</h3>
+            <p>A stock prediction model built on time series data, plus a matrix showing how each S&amp;P 500 company's price correlates with the others.</p>
+            <ul class="tags"><li>Python</li></ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></div>
+            <h3>SubletMe</h3>
+            <p>A marketplace where college students can sublet their apartment or find one to sublet.</p>
+            <ul class="tags"><li>Python</li><li>MongoDB</li><li>Redis</li><li>Nginx</li></ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M7 4h10v6H7zM3 14h8v6H3zM13 14h8v6h-8z"/></svg></div>
+            <h3>Panoramic Image Stitching</h3>
+            <p>Takes two images related by an unknown translation and scale, matches them using RANSAC, and stitches them together.</p>
+            <ul class="tags"><li>Python</li></ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.7-1A4.5 4.5 0 0 1 17 18z"/></svg></div>
+            <h3>Weatherly</h3>
+            <p>A web app that uses the Spotify and OpenWeatherMap APIs to generate a mood-based playlist from Spotify's metrics for each song.</p>
+            <ul class="tags"><li>JavaScript</li><li>HTML/CSS</li><li>Bootstrap 4</li></ul>
+          </article>
+
+          <article class="project reveal">
+            <div class="project-icon"><svg viewBox="0 0 24 24"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div>
+            <h3>This website</h3>
+            <p>Plain HTML, CSS and JavaScript with no frameworks or libraries.</p>
+            <ul class="tags"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="reveal">Skills</h2>
+
+        <div class="skill-grid">
+          <div class="skill reveal">
+            <h3>Languages</h3>
+            <ul class="tags"><li>Java</li><li>Python</li><li>C/C++</li><li>JavaScript</li><li>HTML/CSS</li></ul>
+          </div>
+          <div class="skill reveal">
+            <h3>Frameworks</h3>
+            <ul class="tags"><li>Angular</li><li>Node.js</li><li>Spring/MyBatis</li><li>Flask</li><li>FastAPI</li><li>JUnit</li></ul>
+          </div>
+          <div class="skill reveal">
+            <h3>Databases and cloud</h3>
+            <ul class="tags"><li>PostgreSQL</li><li>MySQL</li><li>Oracle</li><li>MongoDB</li><li>AWS</li><li>Azure</li></ul>
+          </div>
+          <div class="skill reveal">
+            <h3>Developer tools</h3>
+            <ul class="tags"><li>Docker</li><li>Kubernetes</li><li>Jenkins</li><li>Terraform</li><li>Git</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <h2 class="reveal">Contact</h2>
+      <p class="reveal">The best way to reach me is by email.</p>
+      <div class="button-row reveal">
+        <a class="btn btn-primary" href="mailto:scmaddineni@gmail.com">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M3 5h18v14H3zm2 2v.5l7 5 7-5V7zm14 3L12 15 5 10v7h14z"/></svg>
+          scmaddineni@gmail.com
+        </a>
+        <a class="btn" href="resume/Maddineni_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      </div>
+      <small>&copy; <span id="year"></span> Kalyan Maddineni</small>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/simulation.js" defer></script>
+</body>
+</html>
